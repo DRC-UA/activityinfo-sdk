@@ -1,5 +1,5 @@
 import {AiClient, Api} from '../'
-import {AiBuilderSchema} from './AiBuilderSchema'
+import {AiBuilderSchema} from './AiBuilderParser'
 import {AiBuilderFile} from './AiBuilderFile'
 
 export type AiBuilderFormArgs = {

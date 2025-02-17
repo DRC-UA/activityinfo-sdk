@@ -1,4 +1,4 @@
-import {AiBuilderSchema} from './AiBuilderSchema'
+import {AiBuilderSchema} from './AiBuilderParser'
 import * as prettier from 'prettier'
 import * as fs from 'node:fs'
 import {fnSwitch, Obj} from '@alexandreannic/ts-utils'

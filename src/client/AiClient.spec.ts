@@ -2,8 +2,8 @@ import {describe, it} from 'node:test'
 import assert from 'node:assert'
 import {AiClient} from './AiClient'
 import {env} from '../utils/Env'
-import {AiTypeProtectionRmm} from '../interface/2024/AiTypeProtectionRmm'
-import {AiTypeSnfiRmm} from '../interface/2025/AiTypeSnfiRmm'
+import {AiTypeProtectionRmm} from '../schema/2024/AiTypeProtectionRmm'
+import {AiTypeSnfiRmm} from '../schema/2025/AiTypeSnfiRmm'
 
 describe('AiClient', () => {
   const client = new AiClient(env.ACTIVITY_INFO_API_TOKEN)

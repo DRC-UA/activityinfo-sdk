@@ -2308,7 +2308,7 @@ export namespace AiTypeSnfiRmm {
       'Inclumade (Inclumade)': 'ck1smzkm6uha8142',
       'Your Way (YourWay)': 'ca6e1r7m6uha8143',
     },
-    'SNFI 2025 APM': {},
+    'SNFI 2025 APM': {'': 'cf4l4bem797vey53'},
     'Indicators - SNFI': {
       'Emergency Shelter Support > # supported with emergency shelter kits > cash-voucher': 'cgccvcom6f3xnh22',
       'Emergency Shelter Support > # supported with emergency construction materials > cash-voucher': 'cn67cnim6f3xnh23',

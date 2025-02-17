@@ -1,17 +1,24 @@
 {
   "compilerOptions": {
-    "lib": ["ESNext"],
-    "strict": true,
     "target": "ESNext",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "allowJs": true,
-    "outDir": "./dist",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "outDir": "dist",
+    "declaration": true,
+    "declarationMap": true,
     "sourceMap": true,
-    "module": "CommonJS",
-    "moduleResolution": "Node",
-    "disableSizeLimit": true
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true
   },
-  "include": ["src"],
-  "exclude": ["src/interface", "**/*.spec.ts", "**/*.test.ts"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
