@@ -29,7 +29,7 @@ export class AiBuilder {
     },
   ) {}
 
-  readonly generateInterface = async (args: AiBuilderFormArgs) => {
+  readonly generateSchema = async (args: AiBuilderFormArgs) => {
     const sdk = new AiClient(this.props.activityInfoToken, this.props.baseUrl ? new Api(this.props.baseUrl) : undefined)
     const formTree = await sdk.getForm(args.formId)
     const forms = await new AiBuilderSchema.Parser(

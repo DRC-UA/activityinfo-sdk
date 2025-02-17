@@ -75,7 +75,7 @@ describe('AiBuilder', () => {
     //       'Collective Site': {skipChoices: true},
     //     },
     //   })
-    await builder24.generateInterface({
+    await builder24.generateSchema({
       formId: 'czd5jf7lqf2zv4r4r',
       questionSettings: {
         'Reporting Organization': {
@@ -144,7 +144,7 @@ describe('AiBuilder', () => {
       activityInfoToken: env.ACTIVITY_INFO_API_TOKEN,
       outDir: env.ROOT_DIR + '/2025/',
     })
-    await builder25.generateInterface({
+    await builder25.generateSchema({
       formId: 'cmasgbem5w7pgf02',
       questionSettings: {
         Oblast: {},
