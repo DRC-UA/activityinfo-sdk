@@ -1,13 +1,21 @@
 {
   "name": "activityinfo-sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./interface": {
+      "import": "./dist/interface/index.mjs",
+      "require": "./dist/interface/index.js",
+      "types": "./dist/interface/index.d.ts"
+    }
   },
   "scripts": {
     "format": "prettier --write \"**/*.{js,ts,tsx,json}\" --config .prettierrc",
