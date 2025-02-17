@@ -6,6 +6,7 @@ import {fnSwitch, Obj} from '@alexandreannic/ts-utils'
 export class AiBuilderFile {
   constructor(
     private forms: AiBuilderSchema.Form[],
+    private useQuestionCode?: boolean,
     private maxListSize = 20000,
   ) {}
 
@@ -38,6 +39,10 @@ export class AiBuilderFile {
       console.log(`${rootForm.code} contains error.`)
       fs.writeFileSync(filePath, textContent)
     }
+  }
+
+  private getQuestionKey(q: AiBuilderSchema.Question) {
+    return this.useQuestionCode ? q.code : q.label
   }
 
   private readonly makeNamespace = (form: AiBuilderSchema.Form, additionalContent: string = ''): string => {
@@ -82,10 +87,10 @@ export class AiBuilderFile {
           const mapValue = fnSwitch(
             q.type,
             {
-              enumerated: `a.${q.code} ? options['${q.typeRef}'][a.${q.code}!] : undefined`,
-              reference: `a.${q.code} ? '${q.choicesId}' + ':' + options['${q.typeRef}'][a.${q.code}!] : undefined`,
+              enumerated: `a['${this.getQuestionKey(q)}'] ? options['${q.typeRef}'][a['${this.getQuestionKey(q)}']!] : undefined`,
+              reference: `a['${this.getQuestionKey(q)}'] ? '${q.choicesId}' + ':' + options['${q.typeRef}'][a['${this.getQuestionKey(q)}']!] : undefined`,
             },
-            _ => `a.${q.code}`,
+            _ => `a['${this.getQuestionKey(q)}']`,
           )
           return `${q.id}: ${mapValue}`
         })
@@ -115,12 +120,12 @@ export class AiBuilderFile {
           const tab = '      '
           return [
             `/**`,
-            q.label ? tab + `${q.label}` : undefined,
+            this.useQuestionCode ? (q.label ? tab + `${q.label}` : undefined) : undefined,
             q.description ? tab + `${q.description}` : undefined,
             skipTyping ? tab + `⚠️ Typing is omitted due to the large number of choices.` : undefined,
             skipTyping ? tab + `➡️ Directly use label from AiType${form.code}.options['${q.typeRef}']` : undefined,
             tab.slice(2) + `*/`,
-            `${q.code}${q.required ? '' : '?'}: ${this.getType(q, skipTyping)}`,
+            `'${this.getQuestionKey(q)}'${q.required ? '' : '?'}: ${this.getType(q, skipTyping)}`,
           ]
         })
         .filter(_ => !!_)

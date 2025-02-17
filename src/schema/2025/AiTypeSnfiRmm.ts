@@ -4,108 +4,83 @@ export namespace AiTypeSnfiRmm {
   type Opt<T extends keyof typeof options> = keyof (typeof options)[T]
   export interface Type {
     /**
-      Reporting Organization
-    */
-    org_rep: Opt<'Partner'>
+     */
+    'Reporting Organization': Opt<'Partner'>
     /**
-      Implementing Partner
-    */
-    org_imp?: Opt<'Partner'>
+     */
+    'Implementing Partner'?: Opt<'Partner'>
     /**
-      Plan/Project Code
-    */
-    plan_code: Opt<'SNFI 2025 APM'>
+     */
+    'Plan/Project Code': Opt<'SNFI 2025 APM'>
     /**
-      Indicators - SNFI
-    */
-    indicator: Opt<'Indicators - SNFI'>
+     */
+    'Indicators - SNFI': Opt<'Indicators - SNFI'>
     /**
-      Theme
-    */
-    theme?: Opt<'Theme'>
+     */
+    Theme?: Opt<'Theme'>
     /**
-      Oblast
-    */
-    adm1: Opt<'Admin 1'>
+     */
+    Oblast: Opt<'Admin 1'>
     /**
-      Raion
-    */
-    adm2: Opt<'Admin 2'>
+     */
+    Raion: Opt<'Admin 2'>
     /**
-      Hromada
-    */
-    adm3: Opt<'Admin 3'>
+     */
+    Hromada: Opt<'Admin 3'>
     /**
-      Settlement
       ⚠️ Typing is omitted due to the large number of choices.
       ➡️ Directly use label from AiTypeSnfiRmm.options['Admin 4']
     */
-    adm4: string
+    Settlement: string
     /**
-      Collective Sites
-    */
-    cs?: Opt<'Collective Sites'>
+     */
+    'Collective Sites'?: Opt<'Collective Sites'>
     /**
-      Reporting Month
-    */
-    month_rep: string
+     */
+    'Reporting Month': string
     /**
-      Activity Start month
-    */
-    month_start?: string
+     */
+    'Activity Start month'?: string
     /**
-      Activity End month
-    */
-    month_end?: string
+     */
+    'Activity End month'?: string
     /**
-      Population Group
-    */
-    popgroup: Opt<'Population Group'>
+     */
+    'Population Group': Opt<'Population Group'>
     /**
-      Non-individuals Reached
-    */
-    nonind: number
+     */
+    'Non-individuals Reached': number
     /**
-      Total Individuals Reached
-    */
-    ind_total: number
+     */
+    'Total Individuals Reached': number
     /**
-      Girls (0-17)
-    */
-    ind_girls: number
+     */
+    'Girls (0-17)': number
     /**
-      Boys (0-17)
-    */
-    ind_boys: number
+     */
+    'Boys (0-17)': number
     /**
-      Adult Women (18-59)
-    */
-    ind_adwomen: number
+     */
+    'Adult Women (18-59)': number
     /**
-      Adult Men (18-59)
-    */
-    ind_admen: number
+     */
+    'Adult Men (18-59)': number
     /**
-      Older Women (60+)
-    */
-    ind_oldwomen: number
+     */
+    'Older Women (60+)': number
     /**
-      Older Men (60+)
-    */
-    ind_oldmen: number
+     */
+    'Older Men (60+)': number
     /**
-      People with disability
       Out of the total individuals reached
     */
-    ind_pwd?: number
+    'People with disability'?: number
     /**
-      HNRP Scope
-    */
-    hnrp_scope?: Opt<'HNRP Scope'>
+     */
+    'HNRP Scope'?: Opt<'HNRP Scope'>
     /**
-      Outside HNRP Scope sub-category
-    */
-    outscope_type?: Opt<'Outside HNRP Scope categories'>
+     */
+    'Outside HNRP Scope sub-category'?: Opt<'Outside HNRP Scope categories'>
   }
 
   export const buildRequest = (a: Type, recordId: string, parentRecordId: string | null = null) => {
@@ -115,31 +90,31 @@ export namespace AiTypeSnfiRmm {
         recordId,
         parentRecordId,
         fields: {
-          c5i3wifm5w7q3vq4: a.org_rep ? 'cideet6m4jy2m0fy3x' + ':' + options['Partner'][a.org_rep!] : undefined,
-          cn33ikom5w7q3vq5: a.org_imp ? 'cideet6m4jy2m0fy3x' + ':' + options['Partner'][a.org_imp!] : undefined,
-          cx8b8s5m6ul1gml2: a.plan_code ? 'ctgic3km6ukvzc22' + ':' + options['SNFI 2025 APM'][a.plan_code!] : undefined,
-          ceiqk7wm697ng7n2: a.indicator ? 'cxff543m4r94qi4d' + ':' + options['Indicators - SNFI'][a.indicator!] : undefined,
-          cx1f1xtm5w7q3vqb: a.theme ? options['Theme'][a.theme!] : undefined,
-          czi6xi7m5w7q3vqe: a.adm1 ? 'ciok70dm4r8lp7f2' + ':' + options['Admin 1'][a.adm1!] : undefined,
-          c9jdhgpm5w7q3vqf: a.adm2 ? 'c1v215km4s71ndl22' + ':' + options['Admin 2'][a.adm2!] : undefined,
-          cuzmwpvm5w7q3vsh: a.adm3 ? 'cu8n0g0m4s7y2p16b' + ':' + options['Admin 3'][a.adm3!] : undefined,
-          c42av3m5w7q3vsj: a.adm4 ? 'cyr4ry4m4s81hdd6v' + ':' + options['Admin 4'][a.adm4!] : undefined,
-          cukxnnum73gr39e2: a.cs ? 'ckt3l0m4wiw1n92' + ':' + options['Collective Sites'][a.cs!] : undefined,
-          cwy07nvm5w7q3vsm: a.month_rep,
-          cxukplim5w7q3vsn: a.month_start,
-          cyrbergm5w7q3vso: a.month_end,
-          c34r0rcm5w7q3vsq: a.popgroup ? 'cknn1yzm4s6xuox1x' + ':' + options['Population Group'][a.popgroup!] : undefined,
-          cec1r1cm5w7q3vss: a.nonind,
-          cptm3phm5w7q3vst: a.ind_total,
-          cxchrp3m5w7q3vsu: a.ind_girls,
-          cwhznqsm5w7q3vtv: a.ind_boys,
-          cqxytp7m5w7q3vtw: a.ind_adwomen,
-          c905xm4m5w7q3vtx: a.ind_admen,
-          cmt1lkxm5w7q3vty: a.ind_oldwomen,
-          c8qlzrcm5w7q3vtz: a.ind_oldmen,
-          cdn7buym5w7q3vt10: a.ind_pwd,
-          c1vmga5m5w7q3vt11: a.hnrp_scope ? options['HNRP Scope'][a.hnrp_scope!] : undefined,
-          ct2ezbgm5w7q3vt13: a.outscope_type ? 'ch0e182m4vgc05r2' + ':' + options['Outside HNRP Scope categories'][a.outscope_type!] : undefined,
+          c5i3wifm5w7q3vq4: a['Reporting Organization'] ? 'cideet6m4jy2m0fy3x' + ':' + options['Partner'][a['Reporting Organization']!] : undefined,
+          cn33ikom5w7q3vq5: a['Implementing Partner'] ? 'cideet6m4jy2m0fy3x' + ':' + options['Partner'][a['Implementing Partner']!] : undefined,
+          cx8b8s5m6ul1gml2: a['Plan/Project Code'] ? 'ctgic3km6ukvzc22' + ':' + options['SNFI 2025 APM'][a['Plan/Project Code']!] : undefined,
+          ceiqk7wm697ng7n2: a['Indicators - SNFI'] ? 'cxff543m4r94qi4d' + ':' + options['Indicators - SNFI'][a['Indicators - SNFI']!] : undefined,
+          cx1f1xtm5w7q3vqb: a['Theme'] ? options['Theme'][a['Theme']!] : undefined,
+          czi6xi7m5w7q3vqe: a['Oblast'] ? 'ciok70dm4r8lp7f2' + ':' + options['Admin 1'][a['Oblast']!] : undefined,
+          c9jdhgpm5w7q3vqf: a['Raion'] ? 'c1v215km4s71ndl22' + ':' + options['Admin 2'][a['Raion']!] : undefined,
+          cuzmwpvm5w7q3vsh: a['Hromada'] ? 'cu8n0g0m4s7y2p16b' + ':' + options['Admin 3'][a['Hromada']!] : undefined,
+          c42av3m5w7q3vsj: a['Settlement'] ? 'cyr4ry4m4s81hdd6v' + ':' + options['Admin 4'][a['Settlement']!] : undefined,
+          cukxnnum73gr39e2: a['Collective Sites'] ? 'ckt3l0m4wiw1n92' + ':' + options['Collective Sites'][a['Collective Sites']!] : undefined,
+          cwy07nvm5w7q3vsm: a['Reporting Month'],
+          cxukplim5w7q3vsn: a['Activity Start month'],
+          cyrbergm5w7q3vso: a['Activity End month'],
+          c34r0rcm5w7q3vsq: a['Population Group'] ? 'cknn1yzm4s6xuox1x' + ':' + options['Population Group'][a['Population Group']!] : undefined,
+          cec1r1cm5w7q3vss: a['Non-individuals Reached'],
+          cptm3phm5w7q3vst: a['Total Individuals Reached'],
+          cxchrp3m5w7q3vsu: a['Girls (0-17)'],
+          cwhznqsm5w7q3vtv: a['Boys (0-17)'],
+          cqxytp7m5w7q3vtw: a['Adult Women (18-59)'],
+          c905xm4m5w7q3vtx: a['Adult Men (18-59)'],
+          cmt1lkxm5w7q3vty: a['Older Women (60+)'],
+          c8qlzrcm5w7q3vtz: a['Older Men (60+)'],
+          cdn7buym5w7q3vt10: a['People with disability'],
+          c1vmga5m5w7q3vt11: a['HNRP Scope'] ? options['HNRP Scope'][a['HNRP Scope']!] : undefined,
+          ct2ezbgm5w7q3vt13: a['Outside HNRP Scope sub-category'] ? 'ch0e182m4vgc05r2' + ':' + options['Outside HNRP Scope categories'][a['Outside HNRP Scope sub-category']!] : undefined,
         },
       },
     ]

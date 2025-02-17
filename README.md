@@ -4,11 +4,12 @@ TypeScript SDK to interact with the [ActivityInfo](https://www.activityinfo.org/
 Includes a TypeScript interface builder that facilitates data submission to a database using a human-readable structure.
 
 ## ⬇️ Install
-```ts
+```bash
 npm install activityinfo-sdk
 ```
 
 ## 🛜  Submitting an Activity Record
+
 The SDK provides pre-built interfaces for Humanitarian Ukraine databases (2025).
 The example below demonstrates submitting a record to the SNFI RMM database.
 
@@ -26,26 +27,26 @@ import {AiTypeSnfiRmm} from 'activityinfo-sdk/schema'
 
 // Define an activity record
 const submission: AiTypeSnfiRmm = {
-  org_rep: 'Danish Refugee Council (DRC)',
-  adm1: 'Chernihivska_Чернігівська',
-  adm2: 'Chernihivskyi_Чернігівськии',
-  adm3: 'Chernihivska_UA2302015_Чернігівська',
-  adm4: 'Chernihiv_UA7410039001_Чернігів',
-  plan_code: 'SNFI-DRC-00001' as never,
-  indicator: 'Emergency NFI support > # reached through donation of NFIs (Invincibility Points, bomb shelters, transit centers) > in-kind',
-  theme: 'No specific theme',
-  month_rep: '2025-01',
-  popgroup: 'Internally Displaced',
-  nonind: 10,
-  ind_total: 20,
-  ind_girls: 5,
-  ind_boys: 5,
-  ind_admen: 5,
-  ind_adwomen: 5,
-  ind_oldmen: 0,
-  ind_oldwomen: 0,
-  ind_pwd: 2,
-  outscope_type: 'Outside priority areas',
+  'Reporting Organization': 'Danish Refugee Council (DRC)',
+  'Oblast': 'Chernihivska_Чернігівська',
+  'Raion': 'Chernihivskyi_Чернігівськии',
+  'Hromada': 'Chernihivska_UA2302015_Чернігівська',
+  'Settlement': 'Chernihiv_UA7410039001_Чернігів',
+  'Plan/Project Code': 'SNFI-DRC-001', // If using pre-generated interfaces, this property must be set manually based on your current plan codes.
+  'Indicators - SNFI': 'Emergency NFI support > # reached through donation of NFIs (Invincibility Points, bomb shelters, transit centers) > in-kind',
+  'Theme': 'No specific theme',
+  'Reporting Month': '2025-01',
+  'Population Group': 'Internally Displaced',
+  'Non-individuals Reached': 10,
+  'Total Individuals Reached': 20,
+  'Boys (0-17)': 5,
+  'Girls (0-17)': 5,
+  'Adult Women (18-59)': 5,
+  'Adult Men (18-59)': 5,
+  'Older Women (60+)': 0,
+  'Older Men (60+)': 0,
+  'People with disability': 2,
+  'Outside HNRP Scope sub-category': 'Outside priority areas',
 }
 
 // Convert the submission into a request format compatible with the ActivityInfo API
@@ -74,6 +75,10 @@ builder.generateInterface({
   // Example URL: https://www.activityinfo.org/app#form/cmasgbem5w7pgf02/display/c4l7nlem74zbq7erg
   formId: 'c4l7nlem74zbq7erg',
 
+  // Some forms contain multiple questions with the same label but different meanings.  
+  // To avoid conflicts in the generated interface, use question codes instead of labels.  
+  useQuestionCode: true,
+  
   // Optional settings to customize how specific questions are handled
   questionSettings: {
     'Raion': {
@@ -95,7 +100,8 @@ builder.generateInterface({
 
 ## 🖥️ API Client
 
-The SDK exposes a client interfacing some API endpoints. 
+The SDK provides a client for interacting with various API endpoints.
+
 ```ts
 import {AiClient} from 'activityinfo-sdk'
 const client = new AiClient('<YOUR_ACTIVITYINFO_TOKEN>')

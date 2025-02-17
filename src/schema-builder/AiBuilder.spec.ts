@@ -76,6 +76,7 @@ describe('AiBuilder', () => {
     //     },
     //   })
     await builder24.generateSchema({
+      useQuestionCode: true,
       formId: 'czd5jf7lqf2zv4r4r',
       questionSettings: {
         'Reporting Organization': {
