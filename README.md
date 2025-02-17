@@ -3,18 +3,22 @@
 TypeScript SDK to interact with the [ActivityInfo](https://www.activityinfo.org/) API.
 Includes a TypeScript interface builder that facilitates data submission to a database using a human-readable structure.
 
-## Install
+## ⬇️ Install
 ```ts
 npm install activityinfo-sdk
 ```
 
-## Generate schema
+## 🛜  Submitting an Activity Record
+The SDK provides pre-built interfaces for Humanitarian Ukraine databases (2025).
+The example below demonstrates submitting a record to the SNFI RMM database.
 
+> [!TIP]
+> To generate additional schemas, see the next section: [Generating a schema](#-generating-a-schema).
 
-## Submit an activity using pre-built interfaces
-The example below use the pre-generated `AiTypeSnfiRmm` schema  example shows how to submit an activity to the database:
+You can specify a `Record ID`, which will appear under the same column name in ActivityInfo.
 
-`2025 Ukraine Response Planning & Monitoring` **/** `Response Monitoring Module (RMM)` **/** `SNFI RMM`
+> [!IMPORTANT]  
+> **Note:** If a `Record ID` is provided, repeated submissions will update the existing record instead of creating duplicates.
 
 ```ts
 import {AiClient} from 'activityinfo-sdk'
@@ -48,10 +52,52 @@ const submission: AiTypeSnfiRmm = {
 const request = AiTypeSnfiRmm.buildRequest(submission, 'mycustomid002')
 
 // Initialize client to interact with API
-const client = new AiClient('<PRIVATE ACTIVITYINFO TOKEN>')
+const client = new AiClient('<YOUR_ACTIVITYINFO_TOKEN>')
 
 // Submit the record to ActivityInfo
 await client.submit(AiTypeSnfiRmm.buildRequest(submission, 'mycustomid002'))
 ```
 
-## API Client
+## ⚙️ Generating a Schema
+
+The library already exports schemas from the Humanitarian Ukraine databases for 2025.
+```ts
+import {AiBuilder} from 'activityinfo-sdk'
+
+const builder = new AiBuilder({
+  activityInfoToken: 'TOKEN',
+  outDir: './' // Directory where the generated schema will be saved
+})
+// Generate a TypeScript interface for a specific ActivityInfo form
+builder.generateInterface({
+  // The form ID is extracted from the URL of the form in ActivityInfo.
+  // Example URL: https://www.activityinfo.org/app#form/cmasgbem5w7pgf02/display/c4l7nlem74zbq7erg
+  formId: 'c4l7nlem74zbq7erg',
+
+  // Optional settings to customize how specific questions are handled
+  questionSettings: {
+    'Raion': {
+      // If true, this question will be excluded from the generated schema
+      skip: false,
+
+      // If true, an autocomplete question will be treated as a free-text input
+      skipChoices: false,
+
+      // Filters choices by text; only options containing "DRC" will be included
+      filterChoices: _ => _.includes('DRC'),
+
+      // For multi-input questions, specify which input labels to include in the generated choices
+      selectColumnByLabels: ['SNFI Activity', 'SNFI Indicator'],
+    }
+  }
+})
+```
+
+## 🖥️ API Client
+
+The SDK exposes a client interfacing some API endpoints. 
+```ts
+import {AiClient} from 'activityinfo-sdk'
+const client = new AiClient('<YOUR_ACTIVITYINFO_TOKEN>')
+client...
+```
