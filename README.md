@@ -56,7 +56,7 @@ const request = AiTypeSnfiRmm.buildRequest(submission, 'mycustomid002')
 const client = new AiClient('<YOUR_ACTIVITYINFO_TOKEN>')
 
 // Submit the record to ActivityInfo
-await client.submit(AiTypeSnfiRmm.buildRequest(submission, 'mycustomid002'))
+await client.submit(request)
 ```
 
 ## ⚙️ Generating a Schema
@@ -69,7 +69,7 @@ const builder = new AiBuilder({
   activityInfoToken: 'TOKEN',
   outDir: './' // Directory where the generated schema will be saved
 })
-// Generate a TypeScript interface for a specific ActivityInfo form
+
 builder.generateInterface({
   // The form ID is extracted from the URL of the form in ActivityInfo.
   // Example URL: https://www.activityinfo.org/app#form/cmasgbem5w7pgf02/display/c4l7nlem74zbq7erg
