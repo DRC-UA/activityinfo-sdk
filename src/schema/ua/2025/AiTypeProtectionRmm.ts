@@ -1,8 +1,11 @@
-export type AiTypeSnfiRmm = AiTypeSnfiRmm.Type
+export type AiTypeProtectionRmm = AiTypeProtectionRmm.Type
 
-export namespace AiTypeSnfiRmm {
+export namespace AiTypeProtectionRmm {
   type Opt<T extends keyof typeof options> = keyof (typeof options)[T]
   export interface Type {
+    /**
+     */
+    ID?: string
     /**
      */
     'Reporting Organization': Opt<'Partner'>
@@ -11,13 +14,10 @@ export namespace AiTypeSnfiRmm {
     'Implementing Partner'?: Opt<'Partner'>
     /**
      */
-    'Plan/Project Code': Opt<'SNFI 2025 APM'>
+    'Implementing Partner 2'?: Opt<'Partner'>
     /**
      */
-    'Indicators - SNFI': Opt<'Indicators - SNFI'>
-    /**
-     */
-    Theme?: Opt<'Theme'>
+    'Plan/Project Code': Opt<'Activity Planning Module (Protection)'>
     /**
      */
     Oblast: Opt<'Admin 1'>
@@ -29,94 +29,41 @@ export namespace AiTypeSnfiRmm {
     Hromada: Opt<'Admin 3'>
     /**
       ⚠️ Typing is omitted due to the large number of choices.
-      ➡️ Directly use label from AiTypeSnfiRmm.options['Admin 4']
+      ➡️ Directly use label from AiTypeProtectionRmm.options['Admin 4']
     */
-    Settlement: string
+    Settlement?: string
     /**
      */
-    'Collective Sites'?: Opt<'Collective Sites'>
+    'Collective Site'?: Opt<'Collective Sites'>
     /**
      */
-    'Reporting Month': string
+    'Response Theme': Opt<'Response Theme'>
     /**
      */
-    'Activity Start month'?: string
-    /**
-     */
-    'Activity End month'?: string
-    /**
-     */
-    'Population Group': Opt<'Population Group'>
-    /**
-     */
-    'Non-individuals Reached': number
-    /**
-     */
-    'Total Individuals Reached': number
-    /**
-     */
-    'Girls (0-17)': number
-    /**
-     */
-    'Boys (0-17)': number
-    /**
-     */
-    'Adult Women (18-59)': number
-    /**
-     */
-    'Adult Men (18-59)': number
-    /**
-     */
-    'Older Women (60+)': number
-    /**
-     */
-    'Older Men (60+)': number
-    /**
-      Out of the total individuals reached
-    */
-    'People with disability'?: number
-    /**
-     */
-    'HNRP Scope'?: Opt<'HNRP Scope'>
-    /**
-     */
-    'Outside HNRP Scope sub-category'?: Opt<'Outside HNRP Scope categories'>
+    'Activities and People'?: AiTypeActivitiesAndPeople[]
   }
 
   export const buildRequest = (a: Type, recordId: string, parentRecordId: string | null = null) => {
     return [
       {
-        formId: 'cmasgbem5w7pgf02',
+        formId: 'c1viqabm4whwvwo3',
         recordId,
         parentRecordId,
         fields: {
-          c5i3wifm5w7q3vq4: a['Reporting Organization'] ? 'cideet6m4jy2m0fy3x' + ':' + options['Partner'][a['Reporting Organization']!] : undefined,
-          cn33ikom5w7q3vq5: a['Implementing Partner'] ? 'cideet6m4jy2m0fy3x' + ':' + options['Partner'][a['Implementing Partner']!] : undefined,
-          cx8b8s5m6ul1gml2: a['Plan/Project Code'] ? 'ctgic3km6ukvzc22' + ':' + options['SNFI 2025 APM'][a['Plan/Project Code']!] : undefined,
-          ceiqk7wm697ng7n2: a['Indicators - SNFI'] ? 'cxff543m4r94qi4d' + ':' + options['Indicators - SNFI'][a['Indicators - SNFI']!] : undefined,
-          cx1f1xtm5w7q3vqb: a['Theme'] ? options['Theme'][a['Theme']!] : undefined,
-          czi6xi7m5w7q3vqe: a['Oblast'] ? 'ciok70dm4r8lp7f2' + ':' + options['Admin 1'][a['Oblast']!] : undefined,
-          c9jdhgpm5w7q3vqf: a['Raion'] ? 'c1v215km4s71ndl22' + ':' + options['Admin 2'][a['Raion']!] : undefined,
-          cuzmwpvm5w7q3vsh: a['Hromada'] ? 'cu8n0g0m4s7y2p16b' + ':' + options['Admin 3'][a['Hromada']!] : undefined,
-          c42av3m5w7q3vsj: a['Settlement'] ? 'cyr4ry4m4s81hdd6v' + ':' + options['Admin 4'][a['Settlement']!] : undefined,
-          cukxnnum73gr39e2: a['Collective Sites'] ? 'ckt3l0m4wiw1n92' + ':' + options['Collective Sites'][a['Collective Sites']!] : undefined,
-          cwy07nvm5w7q3vsm: a['Reporting Month'],
-          cxukplim5w7q3vsn: a['Activity Start month'],
-          cyrbergm5w7q3vso: a['Activity End month'],
-          c34r0rcm5w7q3vsq: a['Population Group'] ? 'cknn1yzm4s6xuox1x' + ':' + options['Population Group'][a['Population Group']!] : undefined,
-          cec1r1cm5w7q3vss: a['Non-individuals Reached'],
-          cptm3phm5w7q3vst: a['Total Individuals Reached'],
-          cxchrp3m5w7q3vsu: a['Girls (0-17)'],
-          cwhznqsm5w7q3vtv: a['Boys (0-17)'],
-          cqxytp7m5w7q3vtw: a['Adult Women (18-59)'],
-          c905xm4m5w7q3vtx: a['Adult Men (18-59)'],
-          cmt1lkxm5w7q3vty: a['Older Women (60+)'],
-          c8qlzrcm5w7q3vtz: a['Older Men (60+)'],
-          cdn7buym5w7q3vt10: a['People with disability'],
-          c1vmga5m5w7q3vt11: a['HNRP Scope'] ? options['HNRP Scope'][a['HNRP Scope']!] : undefined,
-          ct2ezbgm5w7q3vt13: a['Outside HNRP Scope sub-category'] ? 'ch0e182m4vgc05r2' + ':' + options['Outside HNRP Scope categories'][a['Outside HNRP Scope sub-category']!] : undefined,
+          c9jwta5m4whznd44: a['ID'],
+          chkoxzhm4wi1a2f5: a['Reporting Organization'] ? 'cideet6m4jy2m0fy3x' + ':' + options['Partner'][a['Reporting Organization']!] : undefined,
+          cxegdaym4wi2qbq6: a['Implementing Partner'] ? 'cideet6m4jy2m0fy3x' + ':' + options['Partner'][a['Implementing Partner']!] : undefined,
+          c4y1cm9m4wi4r8x7: a['Implementing Partner 2'] ? 'cideet6m4jy2m0fy3x' + ':' + options['Partner'][a['Implementing Partner 2']!] : undefined,
+          cwe8bxcm4wi7lr68: a['Plan/Project Code'] ? 'c9ujc88m4sgf6hw9' + ':' + options['Activity Planning Module (Protection)'][a['Plan/Project Code']!] : undefined,
+          ce9pjx6m4wihjfpa: a['Oblast'] ? 'ciok70dm4r8lp7f2' + ':' + options['Admin 1'][a['Oblast']!] : undefined,
+          c7plljum4wiik9ib: a['Raion'] ? 'c1v215km4s71ndl22' + ':' + options['Admin 2'][a['Raion']!] : undefined,
+          cjd10k0m4wijuqtc: a['Hromada'] ? 'cu8n0g0m4s7y2p16b' + ':' + options['Admin 3'][a['Hromada']!] : undefined,
+          cp70mkkm4wil1q7d: a['Settlement'] ? 'cyr4ry4m4s81hdd6v' + ':' + options['Admin 4'][a['Settlement']!] : undefined,
+          chcqc70m4wjta8gh: a['Collective Site'] ? 'ckt3l0m4wiw1n92' + ':' + options['Collective Sites'][a['Collective Site']!] : undefined,
+          cy52j7km4wiqb94g: a['Response Theme'] ? options['Response Theme'][a['Response Theme']!] : undefined,
         },
       },
+      ...(a['Activities and People'] ?? []).flatMap((_, i) => AiTypeActivitiesAndPeople.buildRequest(_, recordId + 'i' + i, recordId)),
     ]
   }
 
@@ -2283,39 +2230,15 @@ export namespace AiTypeSnfiRmm {
       'Inclumade (Inclumade)': 'ck1smzkm6uha8142',
       'Your Way (YourWay)': 'ca6e1r7m6uha8143',
     },
-    'SNFI 2025 APM': {'': 'cf4l4bem797vey53'},
-    'Indicators - SNFI': {
-      'Emergency Shelter Support > # supported with emergency shelter kits > cash-voucher': 'cgccvcom6f3xnh22',
-      'Emergency Shelter Support > # supported with emergency construction materials > cash-voucher': 'cn67cnim6f3xnh23',
-      'Emergency Shelter Support > # supported with emergency construction materials > in-kind': 'ch7noasm6f3xnh24',
-      'Emergency Shelter Support > # supported with emergency shelter kits > in-kind': 'c72t93hm6f3xnh25',
-      'Emergency NFI support > # supported with household NFI > cash-voucher': 'ci1qchm6f3xnh26',
-      'Emergency NFI support > # reached through donation of NFIs (Invincibility Points, bomb shelters, transit centers) > cash-voucher': 'cmi0cu6m6f3xnh27',
-      'Emergency NFI support > # reached through donation of NFIs (Invincibility Points, bomb shelters, transit centers) > in-kind': 'c5gtxa7m6f3xnh28',
-      'Emergency NFI support > # supported with household NFI > in-kind': 'crmuflgm6f3xnh29',
-      'Winter Heating > # supported with winter energy > cash-voucher': 'cvp39cym6f3xnh2b',
-      'Winter Heating > # supported with cash for utilities > cash-voucher': 'cwdmzdmm6f3xnh2c',
-      'Winter Heating > # supported with winter heating appliances > cash-voucher': 'cg95b8lm6f3xnh2d',
-      'Winter Heating > # supported with winter energy > in-kind': 'cayqgf0m6f3xnh3e',
-      'Winter Heating > # supported with winter heating appliances > in-kind': 'cwngp6lm6f3xnh3f',
-      'Personal Insulation > # supported with NFIs for winter > cash-voucher': 'cder48zm6f3xnh3g',
-      'Personal Insulation > # supported with winter clothes > cash-voucher': 'ctb2mmnm6f3xnh3h',
-      'Personal Insulation > # supported with NFIs for winter > in-kind': 'cmcy1p9m6f3xnh3i',
-      'Personal Insulation > # supported with winter clothes > in-kind': 'ctnej21m6f3xnh3j',
-      'Shelter Insulation > # supported through insulation of substandard houses > cash-voucher': 'c8r9qhcm6f3xnh3k',
-      'Shelter Insulation > # supported through insulation of substandard houses > in-kind': 'c4hhpd3m6f3xnh3l',
-      'Humanitarian repair > # supported with light repairs > cash-voucher': 'coxp89om6f3xnh3m',
-      'Humanitarian repair > # supported with medium repairs > cash-voucher': 'cjj7cijm6f3xnh3n',
-      'Humanitarian repair > # supported with heavy repairs > cash-voucher': 'ck0n2crm6f3xnh3o',
-      'Humanitarian repair > # supported through repairs of common spaces > cash-voucher': 'cvetk8lm6f3xnh3p',
-      'Humanitarian repair > # supported through the repair of social facilities > cash-voucher': 'cetucanm6f3xnh3q',
-      'Humanitarian repair > # supported with light repairs > in-kind': 'c93b2olm6f3xnh3r',
-      'Humanitarian repair > # supported with medium repairs > in-kind': 'ckvgktcm6f3xnh3s',
-      'Humanitarian repair > # supported with heavy repairs > in-kind': 'ca3y9udm6f3xnh3t',
-      'Humanitarian repair > # supported through repairs of common spaces > in-kind': 'c9sdg0rm6f3xnh3u',
-      'Humanitarian repair > # supported through the repair of social facilities > in-kind': 'cgxmt75m6f3xnh3v',
-      'Refurbishment of Collective Sites > # supported through the refurbishment of collective sites > in-kind': 'crvhu8om6f3xnh3w',
-      'Rental support > # received rental support (RMI) > cash-voucher': 'cvw540sm6f3xnh3x',
+    'Activity Planning Module (Protection)': {
+      '': 'c7ci6z0m730pxq83',
+      '': 'cqzyoqrm730zf5d4',
+      '': 'c91inndm73143d45',
+      '': 'cmzh0x9m7317x856',
+      '': 'ct0f0spm7968bod2',
+      '': 'cvwq10vm796dv6e3',
+      '': 'cj7tjljm796h1ve4',
+      '': 'cgsjq7xm796jwzz5',
     },
     'Admin 1': {
       'Autonomous Republic of Crimea_Автономна Республіка Крим': 'cvvjsf2m4r8z2zgf',
@@ -38227,14 +38150,114 @@ export namespace AiTypeSnfiRmm {
       'UKRs011995_Адміністративна будівля': 'cysktmnm5z5nevc14zc',
       'UKRs011990_Модульне містечко': 'cmyx78lm5z5nevc14zd',
     },
-    'Population Group': {'Internally Displaced': 'c3yfomom4s6zizi20', 'Non-Displaced': 'cjccin8m4s6ztsm21'},
-    'Outside HNRP Scope categories': {
-      'Outside priority areas': 'c3ap6l0m4vgd4ov4',
-      'Funding not reported in FTS​': 'c9801rnm4vgdewn5',
-      'Delivered outside HNRP​ mechanism': 'cgc12ggm4vgdovj6',
-      'Not aligned to guidance': 'cei6bscm4vgdvpq7',
-    },
-    Theme: {'No specific theme': 'cu5nj6em5w7q3vqc'},
-    'HNRP Scope': {'Outside HNRP Scope': 'c4xszfom5w7q3vt12'},
+    'Response Theme': {'No specific theme': 'crfw0hkm4wiqb94f'},
+  }
+
+  export type AiTypeActivitiesAndPeople = AiTypeActivitiesAndPeople.Type
+
+  export namespace AiTypeActivitiesAndPeople {
+    type Opt<T extends keyof typeof options> = keyof (typeof options)[T]
+    export interface Type {
+      /**
+       */
+      'Reporting Month': string
+      /**
+       */
+      Indicators: Opt<'Indicators - Protection'>
+      /**
+       */
+      'Population Group': Opt<'Population Group'>
+      /**
+       */
+      'Total Individuals Reached': number
+      /**
+       */
+      'Girls (0-17)': number
+      /**
+       */
+      'Boys (0-17)': number
+      /**
+       */
+      'Adult Women (18-59)': number
+      /**
+       */
+      'Adult Men (18-59)': number
+      /**
+       */
+      'Older Women (60+)': number
+      /**
+       */
+      'Older Men (60+)': number
+      /**
+       */
+      'Non-individuals Reached/Quantity': number
+      /**
+      Out of the total individuals reached
+    */
+      'People with Disability'?: number
+    }
+
+    export const buildRequest = (a: Type, recordId: string, parentRecordId: string | null = null) => {
+      return [
+        {
+          formId: 'cz3l80om4wjulqqi',
+          recordId,
+          parentRecordId,
+          fields: {
+            ctxcbypm5pf0fjs8c: a['Reporting Month'],
+            ckgn2n6m4wk2393o: a['Indicators'] ? 'ctica5gm4r928td16' + ':' + options['Indicators - Protection'][a['Indicators']!] : undefined,
+            cc9whaum4wl74eb12: a['Population Group'] ? 'cknn1yzm4s6xuox1x' + ':' + options['Population Group'][a['Population Group']!] : undefined,
+            cxcth1bm4wk7dvms: a['Total Individuals Reached'],
+            ce79tc4m4wkdpd4t: a['Girls (0-17)'],
+            ckd43oym4wkfhmwu: a['Boys (0-17)'],
+            cflqb6km4wkujyxv: a['Adult Women (18-59)'],
+            clhi83vm4wkxl81w: a['Adult Men (18-59)'],
+            cty2zyem4wkyvyhx: a['Older Women (60+)'],
+            csq1r47m4wl091ky: a['Older Men (60+)'],
+            ctm6pddm4wl2ky2z: a['Non-individuals Reached/Quantity'],
+            c3knsqem4wl8nfu14: a['People with Disability'],
+          },
+        },
+      ]
+    }
+
+    export const options = {
+      'Indicators - Protection': {
+        'Case management - Protection > # of individuals who received protection case management services (not including specialized CP & GBV services)': 'cltuo5sm6gnc64f2',
+        'Case management - Protection > # of individuals who received social accompaniment': 'cz89rbhm6gnc64g3',
+        'Case management - Protection > # of individuals who received home based care': 'crdmliim6gnc64g4',
+        'Case management - Protection > # of organizations of people with disabilities and organizations of older people supported to provide social rehabilitation': 'ct9meaqm6gnc64g5',
+        'Case management - Protection > # of individuals who received social rehabilitation': 'cxtl3dm6gnc64g6',
+        'Community-based protection activities > # of individuals who participated in community-based protection activities': 'cla02spm6gnc64g7',
+        'Community-based protection activities > # of community centers/spaces established or maintained': 'cq50wt6m6gnc64g8',
+        'Community-based protection activities > # of community social facilitators trained and supported': 'cluz106m6gnc64g9',
+        'Individual protection assistance (cash) > # of individuals with specific needs who received cash assistance to prevent, mitigate or respond to protection risks': 'c8p20h6m6gnc64ga',
+        'Individual protection assistance (in-kind) based on individual risk assessment > # of individuals with specific needs who received in kind protection assistance based on individual risk assessment to prevent, mitigate or respond to protection risks':
+          'coeib1pm6gnc64gb',
+        'Legal assistance - HLP > # of individuals who received legal assistance on HLP issues': 'coldqvjm6gnc64gc',
+        'Legal assistance - HLP > # of individuals who successfully secured HLP documentation': 'cj43ufhm6gnc64gd',
+        'Legal assistance - Protection > # of individuals who received legal assistance': 'cse2m80m6gnc64ge',
+        'Legal assistance - Protection > # of individuals who successfully secured civil documentation': 'cx19qngm6gnc64gf',
+        'Protection counselling > # of individuals who received protection counselling': 'cx7lsftm6gnc64gg',
+        'Psychosocial support (individual and groups) - Protection > # of individuals who received individual or group-based psychosocial support': 'cjw9xsmm6gnc64gh',
+        'Referral to specialized services > # of individuals with specific needs referred to specialized services and assistance (Internal/External referrals)': 'c4dmypmm6gnc64gi',
+        'Transportation > # of individuals provided with transportation services - Humanitarian evacuation': 'cqqerunm6gnc64gj',
+        'Transportation > # of individuals provided with transportation services - Access to social services': 'cs1iti8m6gnc64gk',
+        'Hotlines > # of hotlines established and operated': 'cji45t6m6gnc64gl',
+        'Hotlines > # individuals calling hotlines': 'c9iy2ehm6gnc64gm',
+        'Awareness raising - Protection & HLP > # of individuals who participated in awareness raising activities on Protection': 'cgupfhum6gnc64gn',
+        'Awareness raising - Protection & HLP > # of individuals who participated in awareness raising sessions on HLP': 'cwlsm7fm6gnc64go',
+        'Advocacy - Protection > # of advocacy interventions undertaken on protection issues': 'c4glpggm6gnc64gp',
+        'Assessments (Community level) > # protection assessments conducted': 'cq69xxtm6gnc64gq',
+        'Capacity building (Humanitarian actors and Government) - Protection & HLP > # of humanitarian staff trained on protection approaches or issues': 'cthi790m6gnc64gr',
+        'Capacity building (Humanitarian actors and Government) - Protection & HLP > # of government staff trained on protection approaches or issues': 'co8xxc2m6gnc64gs',
+        'Capacity building (Humanitarian actors and Government) - Protection & HLP > # of humanitarian staff trained on HLP': 'ck62or2m6gnc64gt',
+        'Capacity building (Humanitarian actors and Government) - Protection & HLP > # of government staff trained on HLP': 'cptwow7m6gnc64gu',
+        'Support to service providers to prevent disruption of critical service provision > # of service providers supported': 'cnervh1m6gnc64gv',
+        'Protection monitoring at household level > # of individuals reached through protection monitoring at the household level': 'ciqjitjm6gnc64gw',
+        'Protection monitoring at the community level  > # of key informants reached through community level protection monitoring': 'c7w3d24m6gnc64gx',
+      },
+      'Population Group': {'Internally Displaced': 'c3yfomom4s6zizi20', 'Non-Displaced': 'cjccin8m4s6ztsm21'},
+    }
   }
 }

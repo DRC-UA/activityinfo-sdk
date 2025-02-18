@@ -1,9 +1,7 @@
-import {describe, it} from 'node:test'
-import assert from 'node:assert'
 import {AiClient} from './AiClient'
 import {env} from '../utils/Env'
-import {AiTypeProtectionRmm} from '../schema/2024/AiTypeProtectionRmm'
-import {AiTypeSnfiRmm} from '../schema/2025/AiTypeSnfiRmm'
+import {AiTypeSnfiRmm} from '../schema/ua/2025/AiTypeSnfiRmm'
+import {schema} from '../schema'
 
 describe('AiClient', () => {
   const client = new AiClient(env.ACTIVITY_INFO_API_TOKEN)
@@ -141,8 +139,8 @@ describe('AiClient', () => {
       'Outside HNRP Scope sub-category': 'Outside priority areas',
     }
 
-    const request = AiTypeSnfiRmm.buildRequest(data, 'deletemesnfi2025')
-    assert.deepEqual(request, [
+    const request = schema.ua2025.AiTypeSnfiRmm.buildRequest(data, 'deletemesnfi2025')
+    expect(request).toEqual([
       {
         formId: 'cmasgbem5w7pgf02',
         recordId: 'deletemesnfi2025',
@@ -173,6 +171,106 @@ describe('AiClient', () => {
           cdn7buym5w7q3vt10: 2,
           c1vmga5m5w7q3vt11: undefined,
           ct2ezbgm5w7q3vt13: 'ch0e182m4vgc05r2:c3ap6l0m4vgd4ov4',
+        },
+      },
+    ])
+  })
+
+  it('Nested interface', () => {
+    const data: schema.ua2025.AiTypeProtectionRmm = {
+      'Reporting Organization': 'Danish Refugee Council (DRC)',
+      'Plan/Project Code': 'DRC-PROT-001' as '',
+      Oblast: 'Chernihivska_Чернігівська',
+      Raion: 'Chernihivskyi_Чернігівськии',
+      Hromada: 'Chernihivska_UA2302015_Чернігівська',
+      'Response Theme': 'No specific theme',
+      'Activities and People': [
+        {
+          'Adult Men (18-59)': 0,
+          'Adult Women (18-59)': 1,
+          'Boys (0-17)': 2,
+          'Girls (0-17)': 3,
+          Indicators: 'Advocacy - Protection > # of advocacy interventions undertaken on protection issues',
+          'Non-individuals Reached/Quantity': 1,
+          'Older Men (60+)': 4,
+          'Older Women (60+)': 5,
+          'People with Disability': 1,
+          'Reporting Month': '2025-01',
+          'Total Individuals Reached': 16,
+          'Population Group': 'Internally Displaced',
+        },
+        {
+          'Adult Men (18-59)': 0,
+          'Adult Women (18-59)': 1,
+          'Boys (0-17)': 2,
+          'Girls (0-17)': 3,
+          Indicators: 'Advocacy - Protection > # of advocacy interventions undertaken on protection issues',
+          'Non-individuals Reached/Quantity': 1,
+          'Older Men (60+)': 4,
+          'Older Women (60+)': 5,
+          'People with Disability': 1,
+          'Reporting Month': '2025-01',
+          'Total Individuals Reached': 16,
+          'Population Group': 'Non-Displaced',
+        },
+      ],
+    }
+    const request = schema.ua2025.AiTypeProtectionRmm.buildRequest(data, 'prot202501')
+    expect(request).toEqual([
+      {
+        formId: 'c1viqabm4whwvwo3',
+        recordId: 'prot202501',
+        parentRecordId: null,
+        fields: {
+          c9jwta5m4whznd44: undefined,
+          chkoxzhm4wi1a2f5: 'cideet6m4jy2m0fy3x:cjmwszwm4s8hlkyrae',
+          cxegdaym4wi2qbq6: undefined,
+          c4y1cm9m4wi4r8x7: undefined,
+          cwe8bxcm4wi7lr68: 'c9ujc88m4sgf6hw9:undefined',
+          ce9pjx6m4wihjfpa: 'ciok70dm4r8lp7f2:c59kitcm4r8z2zgh',
+          c7plljum4wiik9ib: 'c1v215km4s71ndl22:cw0oma4m5mo1opi3y',
+          cjd10k0m4wijuqtc: 'cu8n0g0m4s7y2p16b:cxv57e2m5mp72a8g5w',
+          cp70mkkm4wil1q7d: undefined,
+          chcqc70m4wjta8gh: undefined,
+          cy52j7km4wiqb94g: 'crfw0hkm4wiqb94f',
+        },
+      },
+      {
+        formId: 'cz3l80om4wjulqqi',
+        recordId: 'prot202501i0',
+        parentRecordId: 'prot202501',
+        fields: {
+          ctxcbypm5pf0fjs8c: '2025-01',
+          ckgn2n6m4wk2393o: 'ctica5gm4r928td16:c4glpggm6gnc64gp',
+          cc9whaum4wl74eb12: 'cknn1yzm4s6xuox1x:c3yfomom4s6zizi20',
+          cxcth1bm4wk7dvms: 16,
+          ce79tc4m4wkdpd4t: 3,
+          ckd43oym4wkfhmwu: 2,
+          cflqb6km4wkujyxv: 1,
+          clhi83vm4wkxl81w: 0,
+          cty2zyem4wkyvyhx: 5,
+          csq1r47m4wl091ky: 4,
+          ctm6pddm4wl2ky2z: 1,
+          c3knsqem4wl8nfu14: 1,
+        },
+      },
+      {
+        formId: 'cz3l80om4wjulqqi',
+        recordId: 'prot202501i1',
+        parentRecordId: 'prot202501',
+        fields: {
+          ctxcbypm5pf0fjs8c: '2025-01',
+          ckgn2n6m4wk2393o: 'ctica5gm4r928td16:c4glpggm6gnc64gp',
+          cc9whaum4wl74eb12: 'cknn1yzm4s6xuox1x:cjccin8m4s6ztsm21',
+          cxcth1bm4wk7dvms: 16,
+          ce79tc4m4wkdpd4t: 3,
+          ckd43oym4wkfhmwu: 2,
+          cflqb6km4wkujyxv: 1,
+          clhi83vm4wkxl81w: 0,
+          cty2zyem4wkyvyhx: 5,
+          csq1r47m4wl091ky: 4,
+          ctm6pddm4wl2ky2z: 1,
+          c3knsqem4wl8nfu14: 1,
         },
       },
     ])

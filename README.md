@@ -10,6 +10,8 @@ npm install activityinfo-sdk
 
 ## 🛜  Submitting an Activity Record
 
+### Simple schema 
+
 The SDK provides pre-built interfaces for Humanitarian Ukraine databases (2025).
 The example below demonstrates submitting a record to the SNFI RMM database.
 
@@ -23,10 +25,10 @@ You can specify a `Record ID`, which will appear under the same column name in A
 
 ```ts
 import {AiClient} from 'activityinfo-sdk'
-import {AiTypeSnfiRmm} from 'activityinfo-sdk/schema'
+import {schema} from 'activityinfo-sdk/schema'
 
 // Define an activity record
-const submission: AiTypeSnfiRmm = {
+const submission: schema.ua2025.AiTypeSnfiRmm = {
   'Reporting Organization': 'Danish Refugee Council (DRC)',
   'Oblast': 'Chernihivska_Чернігівська',
   'Raion': 'Chernihivskyi_Чернігівськии',
@@ -50,9 +52,64 @@ const submission: AiTypeSnfiRmm = {
 }
 
 // Convert the submission into a request format compatible with the ActivityInfo API
-const request = AiTypeSnfiRmm.buildRequest(submission, 'mycustomid002')
+const request = schema.ua2025.AiTypeSnfiRmm.buildRequest(submission, 'mycustomid002')
 
-// Initialize client to interact with API
+// Initialize the client to interact with API
+const client = new AiClient('<YOUR_ACTIVITYINFO_TOKEN>')
+
+// Submit the record to ActivityInfo
+await client.submit(request)
+```
+
+### Nested schema
+
+```ts
+import {AiClient} from 'activityinfo-sdk'
+import {schema} from 'activityinfo-sdk/schema'
+
+// Define an activity record
+const data: schema.ua2025.AiTypeProtectionRmm = {
+  'Reporting Organization': 'Danish Refugee Council (DRC)',
+  'Plan/Project Code': 'DRC-PROT-001' as '',
+  'Oblast': 'Chernihivska_Чернігівська',
+  'Raion': 'Chernihivskyi_Чернігівськии',
+  'Hromada': 'Chernihivska_UA2302015_Чернігівська',
+  'Response Theme': 'No specific theme',
+  'Activities and People': [
+    {
+      'Adult Men (18-59)': 0,
+      'Adult Women (18-59)': 1,
+      'Boys (0-17)': 2,
+      'Girls (0-17)': 3,
+      'Indicators': 'Advocacy - Protection > # of advocacy interventions undertaken on protection issues',
+      'Non-individuals Reached/Quantity': 1,
+      'Older Men (60+)': 4,
+      'Older Women (60+)': 5,
+      'People with Disability': 1,
+      'Reporting Month': '2025-01',
+      'Total Individuals Reached': 16,
+      'Population Group': 'Internally Displaced',
+    }, {
+      'Adult Men (18-59)': 0,
+      'Adult Women (18-59)': 1,
+      'Boys (0-17)': 2,
+      'Girls (0-17)': 3,
+      'Indicators': 'Advocacy - Protection > # of advocacy interventions undertaken on protection issues',
+      'Non-individuals Reached/Quantity': 1,
+      'Older Men (60+)': 4,
+      'Older Women (60+)': 5,
+      'People with Disability': 1,
+      'Reporting Month': '2025-01',
+      'Total Individuals Reached': 16,
+      'Population Group': 'Non-Displaced',
+    },
+  ],
+}
+
+// Convert the submission into a request format compatible with the ActivityInfo API
+const request = schema.ua2025.AiTypeProtectionRmm.buildRequest(data, 'prot202501')
+
+// Initialize the client to interact with API
 const client = new AiClient('<YOUR_ACTIVITYINFO_TOKEN>')
 
 // Submit the record to ActivityInfo
@@ -88,7 +145,7 @@ builder.generateInterface({
       // If true, an autocomplete question will be treated as a free-text input
       skipChoices: false,
 
-      // Filters choices by text; only options containing "DRC" will be included
+      // Filters choices; only options containing "DRC" will be included
       filterChoices: _ => _.includes('DRC'),
 
       // For multi-input questions, specify which input labels to include in the generated choices

@@ -7,7 +7,7 @@ export type AiBuilderFormArgs = {
   useQuestionCode?: boolean
   formId: string
   fileName?: string
-  questionSettings: Partial<
+  questionSettings?: Partial<
     Record<
       string,
       {

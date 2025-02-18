@@ -75,7 +75,7 @@ export namespace AiTypeProtectionRmm {
           c18374vlqf3085j54: a['theme'] ? options['Response Theme'][a['theme']!] : undefined,
         },
       },
-      ...(a.Activities_and_people ?? []).flatMap((_, i) => AiTypeActivitiesAndPeople.buildRequest(_, recordId + 'i' + i, recordId)),
+      ...(a['Activities_and_people'] ?? []).flatMap((_, i) => AiTypeActivitiesAndPeople.buildRequest(_, recordId + 'i' + i, recordId)),
     ]
   }
 

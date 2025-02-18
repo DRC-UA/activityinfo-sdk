@@ -1,12 +1,11 @@
-﻿import {describe, it} from 'node:test'
-import {AiBuilder} from './AiBuilder'
+﻿import {AiBuilder} from './AiBuilder'
 import {env} from '../utils/Env'
 
 describe('AiBuilder', () => {
   it('Run 2024', async () => {
     const builder24 = new AiBuilder({
       activityInfoToken: env.ACTIVITY_INFO_API_TOKEN,
-      outDir: env.ROOT_DIR + '/2024/',
+      outDir: env.ROOT_DIR + '/ua/2024/',
     })
     //   await builder24.generateInterface({
     //     formId: 'c95ky7klr95z6ia3v',
@@ -143,7 +142,16 @@ describe('AiBuilder', () => {
   it('Run 2025', async () => {
     const builder25 = new AiBuilder({
       activityInfoToken: env.ACTIVITY_INFO_API_TOKEN,
-      outDir: env.ROOT_DIR + '/2025/',
+      outDir: env.ROOT_DIR + '/ua/2025/',
+    })
+    await builder25.generateSchema({
+      formId: 'cvgj28ym513hkiph7y',
+    })
+    await builder25.generateSchema({
+      formId: 'co7iurtm513bt64h7u',
+    })
+    await builder25.generateSchema({
+      formId: 'c1viqabm4whwvwo3',
     })
     await builder25.generateSchema({
       formId: 'cmasgbem5w7pgf02',

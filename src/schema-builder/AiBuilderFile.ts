@@ -101,7 +101,7 @@ export class AiBuilderFile {
         .filter(_ => _.type === 'subform')
         .map(
           _ =>
-            `...(a.${_.code} ?? []).flatMap((_, i) => AiType${_.typeRef}.buildRequest(_, recordId +'i'+ i, recordId))`,
+            `...(a['${this.getQuestionKey(_)}'] ?? []).flatMap((_, i) => AiType${_.typeRef}.buildRequest(_, recordId +'i'+ i, recordId))`,
         ),
       ']',
       '}',

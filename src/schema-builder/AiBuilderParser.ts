@@ -46,9 +46,9 @@ export namespace AiBuilderSchema {
       const schema = this.formTree[formId].schema
       const ignoredInputs: Ai.FormElementType[] = ['section', 'calculated']
       const elements = schema.elements
-        .filter(_ => !ignoredInputs.includes(_.type) && !this.args.questionSettings[_.label]?.skip)
+        .filter(_ => !ignoredInputs.includes(_.type) && !this.args.questionSettings?.[_.label]?.skip)
         .map(_ => {
-          if (this.args.questionSettings[_.label]?.skipChoices) {
+          if (this.args.questionSettings?.[_.label]?.skipChoices) {
             _.type = 'FREE_TEXT'
           }
           return _
@@ -94,7 +94,7 @@ export namespace AiBuilderSchema {
     }
 
     private readonly getColumns = (question: Ai.FormElement): Ai.FormElement[] => {
-      const qSettings = this.args.questionSettings[question.label]
+      const qSettings = this.args.questionSettings?.[question.label]
       const choiceId = question.typeParameters?.range![0].formId
       if (!choiceId) return []
 
@@ -145,7 +145,7 @@ export namespace AiBuilderSchema {
       typeRef: TypeRef
       choices: Choice[]
     }> => {
-      const qSettings = this.args.questionSettings[question.label]
+      const qSettings = this.args.questionSettings?.[question.label]
       const columns = this.getColumns(question)
       const choiceId = question.typeParameters!.range![0].formId
       const choices = await this.sdk.getColumns(
