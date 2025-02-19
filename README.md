@@ -10,18 +10,15 @@ npm install activityinfo-sdk
 
 ## 🛜  Submitting an Activity Record
 
-### Simple schema 
-
 The SDK provides pre-built interfaces for Humanitarian Ukraine databases (2025).
 The example below demonstrates submitting a record to the SNFI RMM database.
-
-> [!TIP]
-> To generate additional schemas, see the next section: [Generating a schema](#-generating-a-schema).
 
 You can specify a `Record ID`, which will appear under the same column name in ActivityInfo.
 
 > [!IMPORTANT]  
 > **Note:** If a `Record ID` is provided, repeated submissions will update the existing record instead of creating duplicates.
+
+### Simple schema
 
 ```ts
 import {AiClient} from 'activityinfo-sdk'
@@ -115,10 +112,16 @@ const client = new AiClient('<YOUR_ACTIVITYINFO_TOKEN>')
 // Submit the record to ActivityInfo
 await client.submit(request)
 ```
+### Auto-complete
+
+Since it's built in TypeScript, questions and options are autocompleted and validated by the compiler, reducing the risk of typos.
+
+![ts-autocomplete.png](doc/ts-autocomplete.png)
 
 ## ⚙️ Generating a Schema
 
-The library already exports schemas from the Humanitarian Ukraine databases for 2025.
+> [!NOTE] 
+> The library already exports schemas from the Humanitarian Ukraine databases for 2025.
 ```ts
 import {AiBuilder} from 'activityinfo-sdk'
 
