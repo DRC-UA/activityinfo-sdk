@@ -36,7 +36,7 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "@alexandreannic/ts-utils": "^2.1.20",
+    "@alexandreannic/ts-utils": "^2.2.0",
     "@types/node": "^22.13.1",
     "dotenv": "^16.4.7",
     "node-fetch": "^3.3.2",

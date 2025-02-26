@@ -2,14 +2,17 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  verbose: false,
-  noStackTrace: true,
+  verbose: true,
+  noStackTrace: false,
   testTimeout: 20000,
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'], // Path to your setup file
-  extensionsToTreatAsEsm: [".ts"],
-  globals: {
-    "ts-jest": {
-      useESM: true,
-    },
+  extensionsToTreatAsEsm: ['.ts'],
+  transform: {
+    '^.+\\.tsx?$': ['ts-jest', {useESM: true}],
   },
+  // globals: {
+  //   "ts-jest": {
+  //     useESM: true,
+  //   },
+  // },
 }

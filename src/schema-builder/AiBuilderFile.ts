@@ -24,10 +24,10 @@ export class AiBuilderFile {
     })
   }
 
-  readonly make = async (outDir: string) => {
+  readonly make = async (outDir: string, fileName?: string) => {
     const [rootForm, ...subForms] = this.forms
 
-    const filePath = outDir + '/AiType' + rootForm.code + '.ts'
+    const filePath = outDir + '/AiType' + (fileName ?? rootForm.code) + '.ts'
     console.log(`Generate into ${filePath}`)
 
     const textContent = this.makeNamespace(rootForm, subForms.map(_ => this.makeNamespace(_)).join('/'))

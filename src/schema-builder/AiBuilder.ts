@@ -38,7 +38,7 @@ export class AiBuilder {
       formTree,
       sdk,
     ).parseForms()
-    await new AiBuilderFile(forms, args.useQuestionCode).make(this.props.outDir)
+    await new AiBuilderFile(forms, args.useQuestionCode).make(this.props.outDir, args.fileName)
   }
   // readonly generateInterface = async (args: AiBuilderFormArgs) => {
   //   const sdk = new AiClient(this.props.activityInfoToken, this.props.baseUrl ? new Api(this.props.baseUrl) : undefined)
