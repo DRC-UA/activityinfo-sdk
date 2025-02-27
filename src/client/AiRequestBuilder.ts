@@ -1,6 +1,6 @@
 import {Ai} from './Ai'
 import Content = Ai.Request.Content
-import {MakeOptional} from '@alexandreannic/ts-utils'
+import {MakeOptional} from '@axanc/ts-utils'
 import {AiClient} from './AiClient'
 
 export class AiRequestBuilder {

@@ -1,7 +1,7 @@
 import {Ai} from '../client/Ai'
 import {AiBuilderFormArgs} from './AiBuilder'
 import {AiClient} from '../client/AiClient'
-import {seq} from '@alexandreannic/ts-utils'
+import {seq} from '@axanc/ts-utils'
 import {slugify} from '../utils/Utils'
 
 export namespace AiBuilderSchema {

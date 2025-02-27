@@ -1,7 +1,7 @@
 import {AiBuilderSchema} from './AiBuilderParser'
 import * as prettier from 'prettier'
 import * as fs from 'node:fs'
-import {fnSwitch, Obj} from '@alexandreannic/ts-utils'
+import {fnSwitch, Obj} from '@axanc/ts-utils'
 
 export class AiBuilderFile {
   constructor(
