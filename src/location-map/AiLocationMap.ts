@@ -1,4 +1,9 @@
-export const aiLocationMap = {
+export const aiLocationMap: {
+  oblast: Record<string, string>
+  raion: Record<string, string>
+  hromada: Record<string, string>
+  settlement: Record<string, string>
+} = {
   oblast: {
     UA01: 'c5c2sr3lq3kjj6gd',
     UA71: 'clbgltvlq3kjj6he',
@@ -1940,7 +1945,7 @@ export const aiLocationMap = {
     UA8000000: 'cnz02yolq3lb1k23hc',
     UA8500000: 'c6ag4o6lq3lb1k23hd',
   },
-  settlmement: {
+  settlement: {
     UA0102001001: 'cxe4t9lq3leebz3he',
     UA0102001002: 'cme1ko3lq3leebz3hf',
     UA0102003001: 'ck5tq6elq3leebz3hg',
@@ -31650,5 +31655,5 @@ export const aiLocationMap = {
     UA8000000000: 'cdbhg2hlq3lkvulqek',
     UA8500000000: 'cfapwkjlq3lkvulqel',
     _NA: 'ciuhl5klq3lkvulqem',
-  } as Record<string, string>,
+  },
 }
