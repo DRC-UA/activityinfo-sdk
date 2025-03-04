@@ -2,6 +2,7 @@ import {AiBuilderSchema} from './AiBuilderParser'
 import * as prettier from 'prettier'
 import * as fs from 'node:fs'
 import {match, Obj} from '@axanc/ts-utils'
+import {AiBuilder} from './AiBuilder'
 
 export class AiBuilderFile {
   constructor(
@@ -87,7 +88,13 @@ export class AiBuilderFile {
           const mapValue = match(q.type)
             .cases({
               enumerated: `a['${this.getQuestionKey(q)}'] ? options['${q.typeRef}'][a['${this.getQuestionKey(q)}']!] : undefined`,
-              reference: `a['${this.getQuestionKey(q)}'] ? '${q.choicesId}' + ':' + options['${q.typeRef}'][a['${this.getQuestionKey(q)}']!] : undefined`,
+              reference: (() => {
+                const hasChoices = !!form.choices[q.typeRef!]
+                const mapChoice = hasChoices
+                  ? `options['${q.typeRef}'][a['${this.getQuestionKey(q)}']!]`
+                  : `a['${this.getQuestionKey(q)}']`
+                return `a['${this.getQuestionKey(q)}'] ? '${q.choicesId}' + ':' + ${mapChoice} : undefined`
+              })(),
             })
             .default(() => `a['${this.getQuestionKey(q)}']`)
           return `${q.id}: ${mapValue}`
@@ -115,7 +122,7 @@ export class AiBuilderFile {
         .flatMap(q => {
           const choices = form.choices[q.typeRef!] ?? []
           const tooManyOptions = choices.length > this.maxListSize
-          const skipTyping = tooManyOptions || !form.choices[q.typeRef!]
+          const skipTyping = tooManyOptions || (q.type === 'reference' && !form.choices[q.typeRef!])
           const tab = '      '
           const comment = [
             this.useQuestionCode ? (q.label ? tab + `${q.label}` : undefined) : undefined,
