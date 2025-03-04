@@ -45,16 +45,11 @@ export namespace AiBuilderSchema {
     private readonly parseForm = async (formId: Ai.Id): Promise<Form[]> => {
       const schema = this.formTree[formId].schema
       const ignoredInputs: Ai.FormElementType[] = ['section', 'calculated']
-      const elements = schema.elements
-        .filter(_ => !ignoredInputs.includes(_.type) && !this.args.questionSettings?.[_.label]?.skip)
-        .map(_ => {
-          if (this.args.questionSettings?.[_.label]?.skipChoices) {
-            _.type = 'FREE_TEXT'
-          }
-          return _
-        })
+      const elements = schema.elements.filter(
+        _ => !ignoredInputs.includes(_.type) && !this.args.questionSettings?.[_.label]?.skip,
+      )
       const questions = elements.flatMap(this.getQuestion)
-      const choices = await this.getChoices(elements)
+      const choices = await this.getChoices(elements.filter(_ => !this.args.questionSettings?.[_.label]?.skipChoices))
       const subForms = await Promise.all(
         elements.filter(_ => _.type === 'subform').flatMap(_ => this.parseForm(_.typeParameters!.formId!)),
       )

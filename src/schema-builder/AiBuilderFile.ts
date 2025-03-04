@@ -1,7 +1,7 @@
 import {AiBuilderSchema} from './AiBuilderParser'
 import * as prettier from 'prettier'
 import * as fs from 'node:fs'
-import {fnSwitch, Obj} from '@axanc/ts-utils'
+import {match, Obj} from '@axanc/ts-utils'
 
 export class AiBuilderFile {
   constructor(
@@ -84,14 +84,12 @@ export class AiBuilderFile {
       form.questions
         .filter(_ => _.type !== 'subform')
         .map(q => {
-          const mapValue = fnSwitch(
-            q.type,
-            {
+          const mapValue = match(q.type)
+            .cases({
               enumerated: `a['${this.getQuestionKey(q)}'] ? options['${q.typeRef}'][a['${this.getQuestionKey(q)}']!] : undefined`,
               reference: `a['${this.getQuestionKey(q)}'] ? '${q.choicesId}' + ':' + options['${q.typeRef}'][a['${this.getQuestionKey(q)}']!] : undefined`,
-            },
-            _ => `a['${this.getQuestionKey(q)}']`,
-          )
+            })
+            .default(() => `a['${this.getQuestionKey(q)}']`)
           return `${q.id}: ${mapValue}`
         })
         .join(',\n'),
@@ -101,7 +99,7 @@ export class AiBuilderFile {
         .filter(_ => _.type === 'subform')
         .map(
           _ =>
-            `...(a['${this.getQuestionKey(_)}'] ?? []).flatMap((_, i) => AiType${_.typeRef}.buildRequest(_, recordId +'i'+ i, recordId))`,
+            `...(a['${this.getQuestionKey(_)}'] ?? []).flatMap((_, i) => AiType${_.typeRef}.buildRequest(_, recordId +'i'+ ('' + i).padStart(2, '0'), recordId))`,
         ),
       ']',
       '}',
@@ -116,15 +114,17 @@ export class AiBuilderFile {
       form.questions
         .flatMap(q => {
           const choices = form.choices[q.typeRef!] ?? []
-          const skipTyping = choices.length > this.maxListSize
+          const tooManyOptions = choices.length > this.maxListSize
+          const skipTyping = tooManyOptions || !form.choices[q.typeRef!]
           const tab = '      '
-          return [
-            `/**`,
+          const comment = [
             this.useQuestionCode ? (q.label ? tab + `${q.label}` : undefined) : undefined,
             q.description ? tab + `${q.description}` : undefined,
-            skipTyping ? tab + `⚠️ Typing is omitted due to the large number of choices.` : undefined,
-            skipTyping ? tab + `➡️ Directly use label from AiType${form.code}.options['${q.typeRef}']` : undefined,
-            tab.slice(2) + `*/`,
+            tooManyOptions ? tab + `⚠️ Typing is omitted due to the large number of choices.` : undefined,
+            tooManyOptions ? tab + `➡️ Directly use label from AiType${form.code}.options['${q.typeRef}']` : undefined,
+          ].filter(_ => !!_)
+          return [
+            ...(comment.length > 0 ? [`/**`, ...comment, tab.slice(2) + `*/`] : []),
             `'${this.getQuestionKey(q)}'${q.required ? '' : '?'}: ${this.getType(q, skipTyping)}`,
           ]
         })
@@ -136,15 +136,13 @@ export class AiBuilderFile {
 
   private getType(q: AiBuilderSchema.Question, skipTyping?: boolean): string {
     if (skipTyping) return 'string'
-    return fnSwitch(
-      q.type,
-      {
+    return match(q.type)
+      .cases({
         subform: `AiType${q.typeRef}[]`,
         reference: q.typeRef ? `Opt<'${q.typeRef}'>` : 'string',
         enumerated: q.typeRef ? `Opt<'${q.typeRef}'>` : 'string',
         quantity: 'number',
-      },
-      _ => 'string',
-    )
+      })
+      .default(() => 'string')
   }
 }
