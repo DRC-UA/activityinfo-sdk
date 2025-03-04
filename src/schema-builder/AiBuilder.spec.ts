@@ -150,7 +150,7 @@ describe('AiBuilder', () => {
       activityInfoToken: env.ACTIVITY_INFO_API_TOKEN,
       outDir: env.ROOT_DIR + '/ua/2025/',
     }).generateSchema({
-      formId: 'c95ky7klr95z6ia3v',
+      formId: 'co7iurtm513bt64h7u',
       fileName: 'LocationMap',
       questionSettings: {
         Oblast: {
@@ -165,37 +165,21 @@ describe('AiBuilder', () => {
         Settlement: {
           selectColumnByLabels: ['Admin4 Pcode'],
         },
-        'Collective Site': {skip: true},
-        'Date of completion/ distribution (YYYY-MM-DD)': {skip: true},
-        Comment: {skip: true},
-        'Outside HNRP Scope sub-categories': {skip: true},
         'Reporting Organization': {skip: true},
         'Implementing Partner': {skip: true},
-        'Plan/Project Code': {skip: true},
-        'Indicators - SNFI': {skip: true},
-        'Distribution through Common Pipeline': {skip: true},
-        Theme: {skip: true},
-        'Collective Sites': {skip: true},
-        'Reporting Month': {skip: true},
-        'Activity Start month': {skip: true},
-        'Activity End month': {skip: true},
-        'Population Group': {skip: true},
-        'Non-individuals Reached': {skip: true},
-        'Total Individuals Reached': {skip: true},
-        'Girls (0-17)': {skip: true},
-        'Boys (0-17)': {skip: true},
-        'Adult Women (18-59)': {skip: true},
-        'Adult Men (18-59)': {skip: true},
-        'Older Women (60+)': {skip: true},
-        'Older Men (60+)': {skip: true},
-        'People with disability': {skip: true},
-        'HNRP Scope': {skip: true},
-        'Outside HNRP Scope sub-category': {skip: true},
+        'Collective Site': {skip: true},
+        'Activities and People': {skip: true},
+        'Response Theme': {skip: true},
+        'Plan/Project code': {skip: true},
+        'Implementing Partner 2': {skip: true},
+        ID: {skip: true},
       },
     })
   })
 
   it('Build 2025 form', async () => {
+    const enable = false
+    if (!enable) return
     const builder25 = new AiBuilder({
       activityInfoToken: env.ACTIVITY_INFO_API_TOKEN,
       outDir: env.ROOT_DIR + '/ua/2025/',
