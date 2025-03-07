@@ -94,7 +94,7 @@ export namespace AiBuilderSchema {
       if (!choiceId) return []
 
       const getDefaultColumnIds = (): Ai.FormElement[] => {
-        return this.formTree[choiceId].schema.elements.filter(_ => _.required && _.key)
+        return this.formTree[choiceId].schema.elements.filter(_ => /**_.required &&*/ _.key)
       }
       const getSelectedColumns = (): Ai.FormElement[] | undefined => {
         const columnsLabels = qSettings?.selectColumnByLabels
